@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  root to: 'short_links#new'
+  root 'short_links#new'
 
-  resources :short_links, only: [:new, :create, :show, :update]
-  get 's/:short_url', to: 'short_links#index'
+  resources :short_links, only: [:new, :create, :show, :update] do
+    member do
+      get 'admin'
+    end
+  end
+  get 's/:short_url', to: 'short_links#redirect_to_original_url', as: 'redirect_to_original_url'
 end

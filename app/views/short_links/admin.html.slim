@@ -1,0 +1,13 @@
+ruby:
+  original_url = @short_link.original_url
+  view_count = @short_link.view_count
+  disabled = @short_link.expired ? true : false
+
+.d-flex.flex-column.text-center
+  .mb-4
+    h5 Would you like to expire the short link for #{original_url}?
+
+    = form_for @short_link do |f|
+      = f.submit :Expire, class: 'btn btn-danger btn-lg', disabled: disabled
+
+  .alert.alert-info #{original_url} has been visited #{pluralize(view_count, 'time')}.
